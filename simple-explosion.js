@@ -13,7 +13,8 @@ function setup() {
 }
 
 function draw() {
-    gridSize = slider.value()
+    // Only set gridSize to odd numbers
+    gridSize = 2 * Math.floor(slider.value()/2) + 1
     background(0, 195, 192);
     drawCircles(gridSize)
 
