@@ -3,18 +3,18 @@ var canvasSize = 600
 var currentFrame = 0
 var polarity = 1
 
-var slider;
+var gridSlider;
 function setup() {
     createCanvas(canvasSize, canvasSize);
     frameRate(3); 
-    slider = createSlider(7, 57, 15);
-    slider.position(10, 650);
-    slider.style('width', '180px');
+    gridSlider = createSlider(7, 57, 15);
+    gridSlider.position(10, 650);
+    gridSlider.style('width', '180px');
 }
 
 function draw() {
     // Only set gridSize to odd numbers
-    gridSize = 2 * Math.floor(slider.value()/2) + 1
+    gridSize = 2 * Math.floor(gridSlider.value()/2) + 1
     background(0, 195, 192);
     drawGridCircles(gridSize)
 

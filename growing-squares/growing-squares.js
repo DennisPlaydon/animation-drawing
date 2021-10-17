@@ -3,22 +3,34 @@ var canvasSize = 600
 var currentFrame = 0
 var polarity = 1
 
-var slider;
+var gridSlider;
+var frameRateSlider;
 function setup() {
-    createCanvas(canvasSize, canvasSize);
+    let sliderAndTextBuffer = 100
+    createCanvas(canvasSize, canvasSize+sliderAndTextBuffer);
     frameRate(3); 
-    slider = createSlider(5, 57, 5);
-    slider.position(10, 650);
-    slider.style('width', '180px');
+    gridSlider = createSlider(5, 57, 5);
+    gridSlider.position(10, 680);
+    gridSlider.style('width', '180px');
+
+    frameRateSlider = createSlider(1, 60, 3);
+    frameRateSlider.position(220, 680);
+    frameRateSlider.style('width', '90px');
 }
 
 function draw() {
     // Only set gridSize to odd numbers
-    gridSize = 2 * Math.floor(slider.value()/2) + 1
+    gridSize = 2 * Math.floor(gridSlider.value()/2) + 1
 
     background(0, 195, 192);
     drawGridCircles(gridSize)
     drawGrowingSquares(gridSize);
+
+    textSize(25);
+    fill(1);
+    text(`Grid Size (${gridSlider.value()}x${gridSlider.value()})`, 5, 660);
+    text(`Frame rate (${frameRateSlider.value()} fps)`, 215, 660);
+    frameRate(frameRateSlider.value())
 }
 
 function drawGrowingSquares(gSize) {
@@ -44,12 +56,7 @@ function drawGrowingSquares(gSize) {
 }
 
 function setFill() {
-    if (currentFrame % 2 == 0){ 
-        fill(255,110,110);
-    }
-    else {
-        fill(110,110,255);
-    }
+    fill(255,110,110);
 }
 
 function resetAnimation() {
