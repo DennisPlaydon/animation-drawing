@@ -16,7 +16,7 @@ function draw() {
     // Only set gridSize to odd numbers
     gridSize = 2 * Math.floor(slider.value()/2) + 1
     background(0, 195, 192);
-    drawCircles(gridSize)
+    drawGridCircles(gridSize)
 
     modifyCircle(gridSize)
 }
@@ -46,7 +46,6 @@ function modifyCircle(gSize) {
     ellipse(startingX,startingY+(currentFrame*gridWidth),gridWidth,gridWidth);
 
     currentFrame+=polarity
-    fill('white')
 
     // This is to fix a bug where if you increase the grid size and immediately shrink it back down.
     // The current frame is much larger than the grid size so it freaks itself out.
@@ -60,7 +59,8 @@ function modifyCircle(gSize) {
     }
 }
 
-function drawCircles(numCirclesToDraw) {
+function drawGridCircles(numCirclesToDraw) {
+    fill('white')
     let gridWidth = canvasSize / numCirclesToDraw
     for (let vertical = 0; vertical < numCirclesToDraw; vertical++) { 
         for (let horizontal = 0; horizontal < gridSize; horizontal++) { 
