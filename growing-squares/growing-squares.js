@@ -15,38 +15,40 @@ function setup() {
 function draw() {
     // Only set gridSize to odd numbers
     gridSize = 2 * Math.floor(slider.value()/2) + 1
+
     background(0, 195, 192);
     drawGridCircles(gridSize)
     drawGrowingSquares(gridSize);
 }
 
 function drawGrowingSquares(gSize) {
-    let gridWidth = canvasSize/gSize
-    
+    let individualCellWidth = canvasSize/gSize
     let squareWidth = currentFrame * 2 + 1
-    // let squareWidth = 5
     
+    setFill()
+    let centerCell = Math.floor(gSize/2)
+    let topLeftX = individualCellWidth/2+(centerCell-currentFrame)*individualCellWidth
+    let topLeftY = individualCellWidth/2+(centerCell-currentFrame)*individualCellWidth
+    
+    // Draw N x M square
+    for (let heightCount = 0; heightCount < squareWidth; heightCount++) {
+        for (let widthCount = 0; widthCount < squareWidth; widthCount++) {
+            ellipse(topLeftX+widthCount*individualCellWidth, topLeftY+heightCount*individualCellWidth, individualCellWidth, individualCellWidth);
+        }
+    }
+
+    currentFrame++
+    if (currentFrame > gridSize/2) {
+        resetAnimation()
+    }
+}
+
+function setFill() {
     if (currentFrame % 2 == 0){ 
         fill(255,110,110);
     }
     else {
         fill(110,110,255);
-    }
-    let centerCell = Math.floor(gSize/2)
-    let startingX = gridWidth/2+(centerCell-currentFrame)*gridWidth
-    let startingY = gridWidth/2+(centerCell-currentFrame)*gridWidth
-    
-    for (let heightCount = 0; heightCount < squareWidth; heightCount++) {
-        for (let widthCount = 0; widthCount < squareWidth; widthCount++) {
-            ellipse(startingX+widthCount*gridWidth, startingY+heightCount*gridWidth, gridWidth, gridWidth);
-        }
-    }
-    // ellipse(startingX-(currentFrame*gridWidth),startingY-(currentFrame*gridWidth),gridWidth,gridWidth);
-
-    currentFrame++
-
-    if (currentFrame > gridSize/2) {
-        resetAnimation()
     }
 }
 
